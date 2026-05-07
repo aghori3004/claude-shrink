@@ -9,6 +9,8 @@ and returns a task-shaped summary to Claude's context window.
 import os
 import time
 
+load_dotenv(Path(__file__).parent / ".env")
+
 from mcp.server.fastmcp import FastMCP
 
 from tool_description import TOOL_DESCRIPTION
