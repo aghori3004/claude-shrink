@@ -20,3 +20,6 @@ file paths when possible.
 After receiving the summary, do not re-read those files unless the
 user explicitly asks for raw contents or you need to make a precise
 line-level edit. Trust the summary.
+
+For broad overviews or architecture questions, pass `depth="thorough"`.
+For targeted questions about specific behaviour, the default (`depth="concise"`) is correct.
