@@ -68,7 +68,7 @@ async def call_kimi(system_prompt: str, user_prompt: str) -> dict:
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
         # OpenRouter asks for these for app identification
-        "HTTP-Referer": "https://github.com/your-username/claude-shrink",
+        "HTTP-Referer": "https://github.com/aghori3004/claude-shrink",
         "X-Title": "claude-shrink",
     }
     payload = {

@@ -52,7 +52,7 @@ side. **Cloudflare is free but has a daily cap** that resets at midnight.
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/divyaaa-13/claude-shrink.git
+git clone https://github.com/aghori3004/claude-shrink
 cd claude-shrink
 python3 -m venv venv
 source venv/bin/activate        # Windows: .\venv\Scripts\Activate.ps1
