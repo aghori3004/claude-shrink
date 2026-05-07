@@ -131,8 +131,8 @@ no per-token charges. The trade-off is a daily cap of 10,000 neurons
 
 To use Cloudflare instead of OpenRouter:
 
-1. Set `PROVIDER=cloudflare` in your `.env`
-2. Uncomment and fill in `CF_ACCOUNT_ID` and `CF_API_TOKEN`
+1. Uncomment and fill in `CF_ACCOUNT_ID` and `CF_API_TOKEN` in your `.env`
+2. Leave `OPENROUTER_API_KEY` unset — the server auto-detects Cloudflare when only `CF_*` keys are present
 
 **Getting Cloudflare credentials:**
 

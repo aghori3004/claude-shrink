@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude-shrink__read_and_summarize_files"
+    ]
+  }
+}

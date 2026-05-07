@@ -15,12 +15,19 @@ from tool_description import TOOL_DESCRIPTION
 from files import read_files, TooLargeError
 from logger import log_call
 
-PROVIDER = os.getenv("PROVIDER", "openrouter").strip().lower()
+_has_openrouter = bool(os.getenv("OPENROUTER_API_KEY"))
+_has_cloudflare = bool(os.getenv("CF_ACCOUNT_ID")) and bool(os.getenv("CF_API_TOKEN"))
 
-if PROVIDER == "cloudflare":
+if _has_openrouter:
+    from openrouter import call_kimi, OpenRouterError as ProviderError
+elif _has_cloudflare:
     from cloudflare import call_kimi, CloudflareError as ProviderError
 else:
-    from openrouter import call_kimi, OpenRouterError as ProviderError
+    raise RuntimeError(
+        "No provider credentials found. "
+        "Set OPENROUTER_API_KEY for OpenRouter, "
+        "or set both CF_ACCOUNT_ID and CF_API_TOKEN for Cloudflare Workers AI."
+    )
 
 # ---------------------------------------------------------------------------
 # Kimi prompt templates
