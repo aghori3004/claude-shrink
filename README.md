@@ -22,7 +22,7 @@ You → Claude Code → read_and_summarize_files (MCP tool)
                          ↓
                     Read files from disk
                          ↓
-                    Send to Kimi K2.6 (OpenRouter, free tier)
+                    Send to Kimi K2.6 (OpenRouter)
                          ↓
                     Return task-shaped summary to Claude
 ```
@@ -30,6 +30,20 @@ You → Claude Code → read_and_summarize_files (MCP tool)
 Claude continues with the summary in context. It never sees the raw files.
 Quality stays high because Claude handles all reasoning — only the
 "read and understand files" step is delegated.
+
+### What does it cost?
+
+| Provider | Kimi K2.6 pricing | Cost per typical call† |
+|----------|------------------|-----------------------|
+| **OpenRouter** (default) | ~$0.75/M input, ~$3.50/M output | ~$0.01–0.02 |
+| **Cloudflare Workers AI** | Free (10K neurons/day cap) | $0.00 |
+
+†A typical call sends ~10K input tokens and receives ~2K output tokens.
+
+OpenRouter requires a funded account — add credits at
+[openrouter.ai/credits](https://openrouter.ai/credits). Even light usage
+(~50 calls/day) costs well under $1/day, and you save far more on Claude's
+side. **Cloudflare is free but has a daily cap** that resets at midnight.
 
 ---
 
@@ -48,7 +62,12 @@ pip install -r requirements.txt
 ### 2. Get an OpenRouter API key
 
 Go to **[openrouter.ai/keys](https://openrouter.ai/keys)** → Create key.
-No credit card required. Free tier covers normal usage. Takes 30 seconds.
+Add credits at **[openrouter.ai/credits](https://openrouter.ai/credits)** —
+Kimi K2.6 is a paid model (~$0.01–0.02 per call). Even $5 of credit covers
+hundreds of calls.
+
+> **Want a completely free option?** Use Cloudflare instead — see
+> [Alternative: Cloudflare Workers AI](#alternative-cloudflare-workers-ai) below.
 
 ### 3. Configure
 
@@ -106,9 +125,11 @@ Claude picks the right depth automatically based on the tool description.
 
 ## Alternative: Cloudflare Workers AI
 
-By default, claude-shrink uses **OpenRouter** (recommended — simpler setup, no daily cap).
+Cloudflare offers Kimi K2.6 on its **free tier** — no credit card required,
+no per-token charges. The trade-off is a daily cap of 10,000 neurons
+(~2–5M tokens), which resets at midnight.
 
-To use **Cloudflare Workers AI** instead:
+To use Cloudflare instead of OpenRouter:
 
 1. Set `PROVIDER=cloudflare` in your `.env`
 2. Uncomment and fill in `CF_ACCOUNT_ID` and `CF_API_TOKEN`
@@ -119,9 +140,6 @@ To use **Cloudflare Workers AI** instead:
 2. Go to **AI → Workers AI** in the sidebar and accept terms of service
 3. Copy your **Account ID** (shown at the top of the Workers AI page)
 4. Create an **API Token:** My Profile → API Tokens → Create Token → Custom token → Account → Workers AI → Read
-
-> **Note:** Cloudflare's free tier has a 10,000 neuron/day cap (~2–5M tokens).
-> For most developers this is plenty, but heavy usage may hit the limit.
 
 ---
 
@@ -157,7 +175,7 @@ CLAUDE.md.snippet   → Paste into your project's CLAUDE.md
 
 - Python 3.10+
 - Claude Code (with MCP server support)
-- An API key from [OpenRouter](https://openrouter.ai/keys) (free) or a [Cloudflare](https://dash.cloudflare.com) account (free)
+- An [OpenRouter](https://openrouter.ai) account with credits, or a free [Cloudflare](https://dash.cloudflare.com) account
 
 ---
 

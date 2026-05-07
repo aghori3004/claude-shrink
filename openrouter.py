@@ -32,7 +32,7 @@ def _get_api_key() -> str:
         raise OpenRouterError(
             0, "",
             "OPENROUTER_API_KEY is not set. Add it to your .env file. "
-            "Get a free key at openrouter.ai/keys (no credit card required for free tier)."
+            "Get a key at openrouter.ai/keys, then add credits at openrouter.ai/credits."
         )
     return key
 
